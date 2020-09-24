@@ -29,20 +29,20 @@ module.exports.postLogin = async (req, res, next) => {
     errors.push("Wrong password! " + user.wrongLoginCount + " of 4 attempts.");
     
     if (user.wrongLoginCount >= 3) {
-      
+      console.log(process.env.SENDGRID_API_KEY)
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
+        to: email,
+        from: 'LibApp@whitehouse.org',
+        subject: 'Warning too many failed attempts by logging in',
+        text: 'You have reached ' + user.wrongLoginCount + ' of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
+        html: '<strong>You can also reset your password</strong>',
+      };
       try {
-        console.log(process.env.SENDGRID_API_KEY)
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-        await sgMail.send({
-          to: email,
-          from: 'LibApp@whitehouse.org',
-          subject: 'Warning too many failed attempts by logging in',
-          text: 'You have reached ' + user.wrongLoginCount + ' of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
-          html: '<strong>You can also reset your password</strong>',
-        });
-      } catch (error) {
-      console.log(error);
-    }
+        await sgMail.send(msg);
+      } catch (err) {
+        console.log(err);
+      }
       errors.push("A warning message has been sent to this email address!");
     }
   }
