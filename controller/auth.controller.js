@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const shortid = require('shortid')
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
@@ -11,7 +11,7 @@ module.exports.login = (req, res) => {
   res.render("auth/login");
 }
 
-module.exports.postLogin = (req, res, next) => {
+module.exports.postLogin = async (req, res, next) => {
   const errors = res.locals.errors;
   const email = req.body.email;
   const password = req.body.password;
@@ -31,8 +31,9 @@ module.exports.postLogin = (req, res, next) => {
     if (user.wrongLoginCount >= 3) {
       
       try {
+        console.log(process.env.SENDGRID_API_KEY)
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-        sgMail.send({
+        await sgMail.send({
           to: email,
           from: 'LibApp@whitehouse.org',
           subject: 'Warning too many failed attempts by logging in',
