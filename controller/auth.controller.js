@@ -29,14 +29,13 @@ module.exports.postLogin = (req, res, next) => {
     
     if (user.wrongLoginCount == 3) {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-      const msg = {
-        to: 'test@example.com',
-        from: 'test@example.com',
-        subject: 'Sending with Twilio SendGrid is Fun',
-        text: 'and easy to do anywhere, even with Node.js',
-        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-      };
-      sgMail.send(msg);
+      sgMail.send({
+        to: user.email,
+        from: 'LibApp@dev.com',
+        subject: 'Warning too many failed attempts by logging in',
+        text: 'You have reached 3 of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
+        html: '<strong>You can also reset your password</strong>',
+      });
     }
   }
 
