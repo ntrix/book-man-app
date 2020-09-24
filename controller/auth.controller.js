@@ -1,6 +1,7 @@
 const shortid = require('shortid')
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
+const sgMail = require('@sendgrid/mail');
 
 const db = require('../shared/db');
 const users = db.get('users').value();
@@ -25,6 +26,18 @@ module.exports.postLogin = (req, res, next) => {
   else if (password && !bcrypt.compareSync(password, user.password)) {
     foundUser.set('wrongLoginCount', (user.wrongLoginCount || 0) + 1).write();
     errors.push("Wrong password! " + user.wrongLoginCount + " of 4 attempts.");
+    
+    if (user.wrongLoginCount == 3) {
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
+        to: 'test@example.com',
+        from: 'test@example.com',
+        subject: 'Sending with Twilio SendGrid is Fun',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      };
+      sgMail.send(msg);
+    }
   }
 
   if (errors.length) {

@@ -14,7 +14,8 @@
     "pug": "^3.0.0",
     "shortid": "^2.2.15",
     "md5": "^2.3.0",
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "@sendgrid/mail": "^7.2.6"
   },
   "engines": {
     "node": "12.x"
