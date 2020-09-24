@@ -1,3 +1,4 @@
+
 const shortid = require('shortid')
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
@@ -28,14 +29,19 @@ module.exports.postLogin = (req, res, next) => {
     errors.push("Wrong password! " + user.wrongLoginCount + " of 4 attempts.");
     
     if (user.wrongLoginCount >= 3) {
-      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-      sgMail.send({
-        to: email,
-        from: 'LibApp@whitehouse.org',
-        subject: 'Warning too many failed attempts by logging in',
-        text: 'You have reached ' + user.wrongLoginCount + ' of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
-        html: '<strong>You can also reset your password</strong>',
-      });
+      
+      try {
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        sgMail.send({
+          to: email,
+          from: 'LibApp@whitehouse.org',
+          subject: 'Warning too many failed attempts by logging in',
+          text: 'You have reached ' + user.wrongLoginCount + ' of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
+          html: '<strong>You can also reset your password</strong>',
+        });
+      } catch (error) {
+      console.log(error);
+    }
       errors.push("A warning message has been sent to this email address!");
     }
   }
