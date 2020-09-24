@@ -27,15 +27,16 @@ module.exports.postLogin = (req, res, next) => {
     foundUser.set('wrongLoginCount', (user.wrongLoginCount || 0) + 1).write();
     errors.push("Wrong password! " + user.wrongLoginCount + " of 4 attempts.");
     
-    if (user.wrongLoginCount == 3) {
+    if (user.wrongLoginCount >= 3) {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       sgMail.send({
-        to: user.email,
-        from: 'LibApp@dev.com',
+        to: email,
+        from: 'LibApp@whitehouse.org',
         subject: 'Warning too many failed attempts by logging in',
-        text: 'You have reached 3 of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
+        text: 'You have reached ' + user.wrongLoginCount + ' of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
         html: '<strong>You can also reset your password</strong>',
       });
+      errors.push("A warning message has been sent to this email address!");
     }
   }
 
