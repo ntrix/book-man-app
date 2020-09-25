@@ -30,12 +30,12 @@ block content
   nav.d-flex.justify-content-center(aria-label='Page navigation')
     ul.pagination
       li.page-item
-        a.page-link(href=pages[0]) < <
+        a.page-link(href='?page='+pages[0]) -2
       li.page-item
-        a.page-link(href=pages[1]) 1
+        a.page-link(href='?page='+pages[1])= pages[1]
       li.page-item
-        a.page-link(href=pages[2]) 2
+        a.page-link(href='?page='+pages[2])= pages[2]
       li.page-item
-        a.page-link(href=pages[3]) 3
+        a.page-link(href='?page='+pages[3])= pages[3]
       li.page-item
-        a.page-link(href=pages[4]) > >
+        a.page-link(href='?page='+pages[4]) +2

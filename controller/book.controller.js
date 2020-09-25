@@ -6,16 +6,20 @@ const books = db.get('books').value();
 module.exports = {
   
   index: (req, res) => {
-    const page = req.query.page;
+    const page = +req.query.page;
     const perPage = 10;
     const maxPage = books.length / perPage | 0;
     const start = (- 1) * perPage;
-    const pageArray = [
-      page > 3? page - 2: 0,
-      page > 1? page - 1: 0,
-      page == 1? 2: page,
-      page < maxPage - 1? page + 1: 0,
-      page < maxPage - 2? page + 2: 0
+    const pageArray =
+      page==1? [1, 1, 2, 3, maxPage]:
+        page==maxPage?
+          maxPage
+    [
+      page > 2? page - 2: 1,
+      page > 1? page - 1: 1,
+      page,
+      page < maxPage - 1? page + 1: maxPage,
+      page < maxPage - 2? page + 2: maxPage
     ];
     res.render("books/index", {
       books: db.get('books').drop(start).take(perPage).value(),
