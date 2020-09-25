@@ -17,6 +17,7 @@ module.exports = {
       { val: page < maxPage - 1? page + 1: 0},
       { val: page < maxPage - 5? page + 5: page < maxPage - 2? maxPage: 0, label: '»' }
     ];
+    
     res.render("books/index", {
       books: db.get('books').drop(start).take(perPage).value(),
       pages: pageArray
