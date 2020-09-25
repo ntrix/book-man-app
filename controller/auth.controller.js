@@ -33,7 +33,7 @@ module.exports.postLogin = async (req, res, next) => {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       const msg = {
         to: email,
-        from: 'LibApp@whitehouse.org',
+        from: 'dev@tienguyen.com',
         subject: 'Warning too many failed attempts by logging in',
         text: 'You have reached ' + user.wrongLoginCount + ' of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
         html: '<strong>You can also reset your password</strong>',
