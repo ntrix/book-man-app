@@ -12,8 +12,20 @@ block content
       input(type='text' name='description')
     button.mt-3.btn.btn-primary(type='submit') Add to library
   hr
+  nav.d-flex.justify-content-center(aria-label='Page navigation')
+    ul.pagination
+      each page in pages
+        li.page-item
+          if page.val
+            a.page-link(href='?page='+page.val)
+              if page.label
+                span= page.label
+              else
+                span= page.val
+          else
+            button.page-link.text-muted.bg-light(disabled)= page.label || page.val
   table.table.table-lg.col
-    legend Book list
+    caption Book list
     tr
       th Book title
       th(colspan='4') Description
@@ -27,15 +39,3 @@ block content
           a.btn.btn-sm.btn-warning(href='/books/upd/' + book.id) Edit
         td
           a.btn.btn-sm.btn-danger(href='/books/del/' + book.id) Delete
-  nav.d-flex.justify-content-center(aria-label='Page navigation')
-    ul.pagination
-      each page in pages
-        li.page-item
-          if page.val
-            a.page-link(href='?page='+page.val)
-              if page.label
-                b= page.label
-              else
-                span= page.val
-          else
-            button.page-link(disabled)= page.name || page.val
