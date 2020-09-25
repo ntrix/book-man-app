@@ -11,11 +11,11 @@ module.exports = {
     const maxPage = books.length / perPage | 0;
     const start = (- 1) * perPage;
     const pageArray = [
-      page > 2? page - 2: 0,
+      page > 5? page - 5: page > 2? 1: 0,
       page > 1? page - 1: 0,
       page,
       page < maxPage - 1? page + 1: 0,
-      page < maxPage - 2? page + 2: 0
+      page < maxPage - 5? page + 5: page < maxPage - 2? maxPage: 0
     ];
     res.render("books/index", {
       books: db.get('books').drop(start).take(perPage).value(),
