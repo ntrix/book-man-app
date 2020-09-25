@@ -6,10 +6,9 @@ const books = db.get('books').value();
 module.exports = {
   
   index: (req, res) => {
-    const page = req.query.page;
-    const perPage = 16;
-    const start = (page - 1) * perPage;
-    res.render("books/index", { books: books.slice(start, start + perPage) });
+    const perPage = 10;
+    const start = (req.query.page - 1) * perPage;
+    res.render("books/index", { books: db.get('books').drop(start).take(perPage).value() });
   },
   
   update: (req, res) => {
