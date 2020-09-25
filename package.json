@@ -1,5 +1,5 @@
 {
-  "name": "express-18-book-management",
+  "name": "express-19-book-management",
   "version": "0.0.1",
   "description": "Library app",
   "main": "server.js",
@@ -22,7 +22,7 @@
     "node": "12.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/express-18-book-management"
+    "url": "https://glitch.com/edit/#!/express-19-book-management"
   },
   "license": "MIT",
   "keywords": [
