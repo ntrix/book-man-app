@@ -29,7 +29,6 @@ module.exports.postLogin = async (req, res, next) => {
     errors.push("Wrong password! " + user.wrongLoginCount + " of 4 attempts.");
     
     if (user.wrongLoginCount >= 3) {
-      console.log(process.env.SENDGRID_API_KEY)
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       const msg = {
         to: email,
