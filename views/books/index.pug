@@ -29,14 +29,13 @@ block content
           a.btn.btn-sm.btn-danger(href='/books/del/' + book.id) Delete
   nav.d-flex.justify-content-center(aria-label='Page navigation')
     ul.pagination
-      li.page-item
-        a.page-link(href='?page='+pages[0] hidden=!pages[0]) < <
-      li.page-item
-        a.page-link(href='?page='+pages[1] hidden=!pages[1])= pages[1]
-      li.page-item
-        a.page-link(href='?page='+pages[2])
-          u= pages[2]
-      li.page-item
-        a.page-link(href='?page='+pages[3] hidden=!pages[3])= pages[3]
-      li.page-item
-        a.page-link(href='?page='+pages[4] hidden=!pages[4]) > >
+      each page in pages
+        li.page-item
+          if page.val
+            a.page-link(href='?page='+page.val)
+              if page.label
+                b= page.label
+              else
+                span= page.val
+          else
+            button.page-link(disabled)= page.name || page.val
