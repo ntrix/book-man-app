@@ -1,0 +1,22 @@
+extends ../common
+block header
+  h1.col Users profile
+  div.col
+    h3 Profile update
+    a.btn.btn-secondary(href='/') Back to Homepage
+    
+block content
+  form(action='' method='post')
+    input(type='text' name='id' value=chosenUser.id hidden)
+    label Username: 
+      input(type='text' name='username' value=chosenUser.username required)
+    label Email:
+      input(type='email' name='email' value=chosenUser.email)
+    button.mt-3.btn.btn-primary(type='submit') Update this user
+  hr
+  table.table.table-lg.col
+    legend User list
+    each user in users
+      tr
+        td= user.username
+        td= user.email  

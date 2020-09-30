@@ -7,7 +7,8 @@ const users = db.get('users').value();
 module.exports = {
   
   index: (req, res) => {
-    res.render("/profile/", { users: users })
+    var user )
+    res.render("profile/index", { user: user })
   },
   
   postUpdate: (req, res) => {
@@ -19,7 +20,7 @@ module.exports = {
   
   
   avatar: (req, res) => {
-    res.render('/profile/avatar', {
+    res.render('profile/avatar', {
       users: users,
       chosenUser: users.find(u => u.id === req.params.id)
     });
@@ -28,7 +29,7 @@ module.exports = {
   postAvatar: (req, res) => {
     const errors = res.locals.errors;
     if (errors.length) {
-      res.render("/profile/avatar", {
+      res.render("profile/avatar", {
         errors: errors,
         values: req.body,
         users: users
