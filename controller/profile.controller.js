@@ -7,20 +7,28 @@ const users = db.get('users').value();
 module.exports = {
   
   index: (req, res) => {
-    res.render("users/index", { users: users })
+    res.render("/profile/", { users: users })
   },
   
-  update: (req, res) => {
-    res.render('users/edit', {
+  postUpdate: (req, res) => {
+    db.get('users').find({ id: req.body.id })
+      .assign(req.body)
+      .write();
+    res.redirect(req.baseUrl);
+  },
+  
+  
+  avatar: (req, res) => {
+    res.render('/profile/avatar', {
       users: users,
       chosenUser: users.find(u => u.id === req.params.id)
     });
   },
   
-  postAdd: (req, res) => {
+  postAvatar: (req, res) => {
     const errors = res.locals.errors;
     if (errors.length) {
-      res.render("users/index", {
+      res.render("/profile/avatar", {
         errors: errors,
         values: req.body,
         users: users
@@ -31,17 +39,5 @@ module.exports = {
     db.get('users').push(req.body).write();
     res.redirect('back');
   },
-  
-  postUpdate: (req, res) => {
-    db.get('users').find({ id: req.body.id })
-      .assign(req.body)
-      .write();
-    res.redirect(req.baseUrl);
-  },
-  
-  delete: (req, res) => {
-    db.get('users').remove({ id: req.params.id }).write();
-    res.redirect(req.baseUrl);
-  }
   
 }

@@ -6,6 +6,7 @@ const shortid = require('shortid');
 
 const userRoute = require('./routes/user.route');
 const bookRoute = require('./routes/book.route');
+const profileRoute = require('./routes/profile.route');
 const tranRoute = require('./routes/tran.route');
 const authRoute = require('./routes/auth.route');
 
@@ -24,8 +25,9 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.use('/users', userRoute);
 app.use('/books', bookRoute);
+app.use('/users', userRoute);
+app.use('/profile', profileRoute);
 app.use('/trans', tranRoute);
 app.use('/auth', authRoute);
 

@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const userController = require('../controller/user.controller')
+const profileController = require('../controller/profile.controller')
 const validate = require('../validate/user.validate');
 
-router.post('/add', validate.postAdd, userController.postAdd);
+router.post('/', validate.postAdd, profileController.postUpdate);
 
-router.get('/', userController.index);
+router.get('/', profileController.index);
 
-router.get('/upd/:id', userController.update);
+router.get('/avatar', profileController.avatar);
 
-router.post('/upd', userController.postUpdate);
-
-router.get('/del/:id', userController.delete);
+router.post('/avatar', validate.postAdd, profileController.postAvatar);
 
 module.exports = router;
