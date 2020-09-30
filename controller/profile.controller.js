@@ -20,9 +20,9 @@ module.exports = {
   
   
   avatar: (req, res) => {
+    var user = {};
     res.render('profile/avatar', {
-      users: users,
-      chosenUser: users.find(u => u.id === req.params.id)
+      user: user
     });
   },
   
