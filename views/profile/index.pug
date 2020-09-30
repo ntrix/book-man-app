@@ -6,17 +6,13 @@ block header
     a.btn.btn-secondary(href='/') Back to Homepage
     
 block content
+  div.d-flex.justify-content-between
+    img.mb-3(src='https://cdn.glitch.com/7cdf3068-56d2-4682-b13f-5608dbf6420e%2Fbtc.png?v=1600874818880' width=48 height=48)
+    a.mb-3.mr-auto.btn.btn-success(href='/profile/avatar') Update your avatar
   form(action='' method='post')
-    input(type='text' name='id' value=chosenUser.id hidden)
+    input(type='text' name='id' value=user.id hidden)
     label Username: 
-      input(type='text' name='username' value=chosenUser.username required)
+      input(type='text' name='username' value=user.username required)
     label Email:
-      input(type='email' name='email' value=chosenUser.email)
-    button.mt-3.btn.btn-primary(type='submit') Update this user
-  hr
-  table.table.table-lg.col
-    legend User list
-    each user in users
-      tr
-        td= user.username
-        td= user.email  
+      input(type='email' name='email' value=user.email)
+    button.mt-3.btn.btn-primary(type='submit') Update your profile
