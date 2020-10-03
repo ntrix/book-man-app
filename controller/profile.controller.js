@@ -7,7 +7,7 @@ const users = db.get('users').value();
 module.exports = {
   
   index: (req, res) => {
-    var user = {};
+    var user = db.get('users').find({ id: req.body.id }).value();
     res.render("profile/index", { user: user })
   },
   
