@@ -55,6 +55,7 @@ module.exports.postLogin = async (req, res, next) => {
   
   res.cookie('userId', user.id, { signed: true });
   res.cookie('isAdmin', user.isAdmin || 0, { signed: true });
-  res.redirect('/trans');
+  let path = req.signedCookies.path;
+  res.redirect(path? path: '/');
 }
 
