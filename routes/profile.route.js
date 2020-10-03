@@ -12,10 +12,10 @@ router.use(authMiddleware.requireAuth);
 
 router.get('/', profileController.index);
 
-router.post('/', validate.postAdd, profileController.postUpdate);
+router.post('/', upload.single('avatar'), validate.postAdd, profileController.postUpdate);
 
 router.get('/avatar', profileController.avatar);
 
-router.post('/avatar', upload.single('avatar'), validate.postAdd, profileController.postAvatar);
+router.post('/avatar', upload.single('avatar'), /*validate.postAdd, */profileController.postAvatar);
 
 module.exports = router;

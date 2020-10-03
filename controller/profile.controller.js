@@ -28,7 +28,7 @@ module.exports = {
   
   postAvatar: (req, res) => {
     const errors = res.locals.errors;
-    if (errors.length) {
+    if (errors && errors.length) {
       res.render("profile/avatar", {
         errors: errors,
         values: req.body,
