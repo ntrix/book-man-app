@@ -8,9 +8,8 @@ block header
 block content
   div.d-flex.justify-content-between
     img.mb-3(src='https://cdn.glitch.com/7cdf3068-56d2-4682-b13f-5608dbf6420e%2Fbtc.png?v=1600874818880' width=48 height=48)
-    a.mb-3.btn.btn-success(href='/profile/avatar') Choose file
-  form(action='' method='post')
+  form(action='' method='post' enctype='multipart/')
     input(type='text' name='id' value=user.id hidden)
-    label Username: 
-      input(type='text' name='username' value=user.username required)
+    label Avatar upload
+      input(type="file" id="myFile" name="filename")
     button.mt-3.btn.btn-primary(type='submit') Update your avatar
