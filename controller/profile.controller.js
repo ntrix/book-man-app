@@ -27,6 +27,7 @@ module.exports = {
   },
   
   postAvatar: (req, res) => {
+    let id = req.signedCookies.userId;
     const errors = res.locals.errors;
     if (errors) {
       res.render("profile/avatar", {
@@ -46,20 +47,13 @@ module.exports = {
       api_secret: process.env.CD_API_SECRET
     });
     
-    cloudinary.uploader.upload(avatarUrl, function(result, error) {
+    cloudinary.uploader.upload(path, function(result, error) {
       if (result) {
-        var id = req.params.id
-        User.findOneAndUpdate({ _id: id }, { avatar: result.url }, {upsert: true}, function(err, doc) {
-          if (err) console.log(err)
-        });
+        db.get('users').find({ id: id }).set('avatarUrl', result.url).write();
+        console.log(result.url);
       }
-      res.redirect("/users/update/" + req.params.id);
+      res.redirect('back');
     });
-
-    db.get('users').find({ id: req.signedCookies.userId }).value();//avatarUrl
-    //req.body.id = 'u' + shortid.generate();
-    db.get('users').push(req.body).write();
-    res.redirect('back');
   },
   
 }
