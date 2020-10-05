@@ -7,7 +7,7 @@ const cloudinary = require('cloudinary').v2;
 module.exports = {
   
   index: (req, res) => {
-    var user = db.get('users').find({ id: req.signedCookies.userId }).value();
+    let user = db.get('users').find({ id: req.signedCookies.userId }).value();
     res.render("profile/index", { user: user })
   },
   
@@ -20,17 +20,17 @@ module.exports = {
   
   
   avatar: (req, res) => {
-    var user = { id: req.signedCookies.userId };
+    let user = { id: req.signedCookies.userId };
     res.render('profile/avatar', {
       user: user
     });
   },
   
   postAvatar: (req, res) => {
-    var user = { id: req.signedCookies.userId };
+    let user = { id: req.signedCookies.userId };
     const errors = res.locals.errors;
     console.log(req.file);
-    if (errors && errors.length) {
+    if (errors) {
       res.render("profile/avatar", {
         errors: errors,
         values: req.body,
