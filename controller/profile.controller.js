@@ -20,13 +20,14 @@ module.exports = {
   
   
   avatar: (req, res) => {
-    var user = db.get('users').find({ id: req.signedCookies.userId }).value();
+    var user = { id: req.signedCookies.userId };
     res.render('profile/avatar', {
       user: user
     });
   },
   
   postAvatar: (req, res) => {
+    var user = { id: req.signedCookies.userId };
     const errors = res.locals.errors;
     console.log(req.file);
     if (errors && errors.length) {
@@ -37,7 +38,8 @@ module.exports = {
       });
       return;
     }
-    req.body.id = 'u' + shortid.generate();
+    db.get('users').find({ id: req.signedCookies.userId }).value();//avatarUrl
+    //req.body.id = 'u' + shortid.generate();
     db.get('users').push(req.body).write();
     res.redirect('back');
   },

@@ -16,6 +16,6 @@ router.post('/', upload.none('avatar'), validate.postAdd, profileController.post
 
 router.get('/avatar', profileController.avatar);
 
-router.post('/avatar', upload.single('avatar'), validate.postAdd, profileController.postAvatar);
+router.post('/avatar', upload.single('avatar'), profileController.postAvatar);
 
 module.exports = router;
