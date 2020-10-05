@@ -1033,7 +1033,8 @@
       "password": "$2a$10$ilO14griNhkwb/iIrLt23eTjzL4TyT4U9XJ9jV/FdDGjEx.31TkeS",
       "email": "admin@admin.com",
       "isAdmin": 1,
-      "wrongLoginCount": 0
+      "wrongLoginCount": 0,
+      "avatarUrl": "http://res.cloudinary.com/dctcnhecv/image/upload/v1601911818/w3koz6k9loxn5g86uzaq.ico"
     },
     {
       "id": "uaeiasdbnH",
