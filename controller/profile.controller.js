@@ -2,7 +2,7 @@ const shortid = require('shortid')
 
 const db = require('../shared/db');
 const users = db.get('users').value();
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('cloudinary');
 
 module.exports = {
   
@@ -27,9 +27,7 @@ module.exports = {
   },
   
   postAvatar: (req, res) => {
-    let user = { id: req.signedCookies.userId };
     const errors = res.locals.errors;
-    console.log(req.file);
     if (errors) {
       res.render("profile/avatar", {
         errors: errors,
@@ -38,6 +36,26 @@ module.exports = {
       });
       return;
     }
+    
+    /*_________Upload avatar file to CD______________*/
+    let path = req.file.path;
+    
+    cloudinary.config({
+      cloud_name: process.env.CD_NAME,
+      api_key: process.env.CD_API_KEY,
+      api_secret: process.env.CD_API_SECRET
+    });
+    
+    cloudinary.uploader.upload(avatarUrl, function(result, error) {
+      if (result) {
+        var id = req.params.id
+        User.findOneAndUpdate({ _id: id }, { avatar: result.url }, {upsert: true}, function(err, doc) {
+          if (err) console.log(err)
+        });
+      }
+      res.redirect("/users/update/" + req.params.id);
+    });
+
     db.get('users').find({ id: req.signedCookies.userId }).value();//avatarUrl
     //req.body.id = 'u' + shortid.generate();
     db.get('users').push(req.body).write();
