@@ -12,7 +12,7 @@ router.use(authMiddleware.requireAuth);
 
 router.get('/', profileController.index);
 
-router.post('/', upload.single('avatar'), validate.postAdd, profileController.postUpdate);
+router.post('/', upload.none('avatar'), validate.postAdd, profileController.postUpdate);
 
 router.get('/avatar', profileController.avatar);
 

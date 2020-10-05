@@ -20,7 +20,7 @@ module.exports = {
   
   
   avatar: (req, res) => {
-    var user = {};
+    var user = db.get('users').find({ id: req.signedCookies.userId }).value();
     res.render('profile/avatar', {
       user: user
     });
