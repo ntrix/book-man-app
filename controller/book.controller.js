@@ -27,21 +27,11 @@ module.exports = {
     });
   },
   
-  update: async (req, res) => {
-    const books = await Book.find();
-    res.render('books/edit', {
-      books: books,
-      chosenBook: Book.findById( req.params.id )
-    });
-  },
-  
   postAdd: (req, res) => {
     if (req.body.title.length){
-      //req.body.id = 'b' + shortid.generate();
-      //Book.insert(req.body);
       const book = new Book({
-        title: req.title,
-        description: req.description
+        title: req.body.title,
+        description: req.body.description
       });
 
       book.save( function(err, data) {
@@ -51,11 +41,20 @@ module.exports = {
     }
   },
   
+  update: async (req, res) => {
+    const books = await Book.find();
+    res.render('books/edit', {
+      books: books,
+      chosenBook: Book.findById( req.params.id )
+    });
+  },
+  
   postUpdate: (req, res) => {
-    Book.findById( req.body.id )
-      .assign(req.body)
-      .write();
-    res.redirect(req.baseUrl);
+    const {id, title, description} = req.body;
+    Book.findOneAndUpdate({ _id: id }, { title: title, description: description }, { new: true }, function(err, data) {
+      if (err) console.log(err);
+      else res.redirect(req.baseUrl);
+    })
   },
   
   delete: (req, res) => {
