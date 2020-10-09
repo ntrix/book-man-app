@@ -1,5 +1,9 @@
 const express = require("express");
-const mongoose = require("mongoose");
+try {
+  const mongoose = require("mongoose");
+} catch (e) {
+  console.log(e);
+}
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const shortid = require('shortid');
