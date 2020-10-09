@@ -13,9 +13,7 @@ module.exports.login = (req, res) => {
 }
 
 module.exports.postLogin = async (req, res, next) => {
-  const errors = res.locals.errors;
-  const email = req.body.email;
-  const password = req.body.password;
+  const { errors, email, password } = req.body;
   
   const foundUser = User.find({ email: email });
   const user = foundUser.value();

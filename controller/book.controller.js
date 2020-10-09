@@ -1,7 +1,3 @@
-const shortid = require('shortid');
-
-//const db = require('../shared/db');
-//const books = db.get('books').value();
 const { Book } = require("../shared/db");
 
 module.exports = {
@@ -60,8 +56,9 @@ module.exports = {
   },
   
   delete: (req, res) => {
-    Book.remove({ id: req.params.id }).write();
-    res.redirect(req.baseUrl);
+    Book.findByIdAndRemove( req.params.id, function(err, data) {
+      if (err) console.log(err);
+      else res.redirect(req.baseUrl);
+    });
   }
-  
 }
