@@ -21,9 +21,8 @@ module.exports = {
       { val: page < maxPage - 5? page + 5: page < maxPage - 2? maxPage: 0, label: '»' }
     ];
     
-    console.log(books);
     res.render("books/index", {
-      books: books.slice(start, start + perPage),//Book.drop(start).take(perPage).value(),
+      books: books.slice(start, start + perPage),
       pages: pageArray
     });
   },
@@ -32,14 +31,14 @@ module.exports = {
     const books = await Book.find();
     res.render('books/edit', {
       books: books,
-      chosenBook: books.find(b => b.id === req.params.id)
+      chosenBook: Book.findById( req.params.id )
     });
   },
   
   postAdd: (req, res) => {
     if (req.body.title.length){
-      req.body.id = 'b' + shortid.generate();
-      Book.push(req.body).write();
+      //req.body.id = 'b' + shortid.generate();
+      Book.insert(req.body);
       res.redirect('back');
     }
   },
