@@ -7,13 +7,13 @@ const { User } = require("../shared/db");
 module.exports = {
   
   index: (req, res) => {
-    res.render("users/index", { users: users })
+    res.render("users/index", { users: User.find() })
   },
   
   update: (req, res) => {
     res.render('users/edit', {
-      users: users,
-      chosenUser: users.find(u => u.id === req.params.id)
+      users: User.find(),
+      chosenUser: User.findById(req.params.id)
     });
   },
   
@@ -23,24 +23,24 @@ module.exports = {
       res.render("users/index", {
         errors: errors,
         values: req.body,
-        users: users
+        users: User.find()
       });
       return;
     }
-    req.body.id = 'u' + shortid.generate();
-    db.get('users').push(req.body).write();
+    //req.body.id = 'u' + shortid.generate();
+    User.push(req.body).write();
     res.redirect('back');
   },
   
   postUpdate: (req, res) => {
-    db.get('users').find({ id: req.body.id })
+    User.findById( req.body.id )
       .assign(req.body)
       .write();
     res.redirect(req.baseUrl);
   },
   
   delete: (req, res) => {
-    db.get('users').remove({ id: req.params.id }).write();
+    User.remove({ id: req.params.id }).write();
     res.redirect(req.baseUrl);
   }
   
