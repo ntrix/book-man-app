@@ -1,4 +1,4 @@
-const db = require('../shared/db');
+//const db = require('../shared/db');
 
 module.exports = {
   requireAuth: (req, res, next) => {
