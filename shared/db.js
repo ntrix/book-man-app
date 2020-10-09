@@ -6,7 +6,7 @@ const db = low(adapter);
 db.defaults({ books: [], users: [], trans: [] }).write();*/
 
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 //const ObjectId = Schema.ObjectId;
 
 const UserSchema = new Schema({
