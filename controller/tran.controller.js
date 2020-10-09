@@ -11,7 +11,7 @@ module.exports = {
     const id = req.signedCookies.userId;
     const isAdmin = +req.signedCookies.isAdmin;
     console.log(typeof id, typeof isAdmin);
-    let trans = db.get('trans').value();
+    let trans = Tran.find();
     
     if (!isAdmin)
       trans = trans.filter(t => t.userId === id );

@@ -13,7 +13,7 @@ module.exports = {
   },
   
   postUpdate: (req, res) => {
-    db.get('users').find({ id: req.body.id })
+    User.findById( req.body.id )
       .assign(req.body)
       .write();
     res.redirect(req.baseUrl);
@@ -34,7 +34,7 @@ module.exports = {
       res.render("profile/avatar", {
         errors: errors,
         values: req.body,
-        users: users
+        users: User.find()
       });
       return;
     }
@@ -50,7 +50,7 @@ module.exports = {
     
     cloudinary.uploader.upload(path, function(result, error) {
       if (result) {
-        db.get('users').find({ id: id }).set('avatarUrl', result.url).write();
+        User.find( id ).set('avatarUrl', result.url).write();
         console.log(result.url);
       }
       res.redirect('back');
