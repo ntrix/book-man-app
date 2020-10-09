@@ -8,8 +8,10 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const shortid = require('shortid');
 
-mongoose.set("useUnifiedTopology", true);
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGO_URL, {
+             useNewUrlParser: true,
+             useUnifiedTopology: true
+          });
 
 const userRoute = require('./routes/user.route');
 const bookRoute = require('./routes/book.route');
