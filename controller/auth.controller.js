@@ -15,7 +15,6 @@ module.exports.postLogin = async (req, res, next) => {
   const errors = res.locals.errors;
   const email = req.body.email;
   const password = req.body.password;
-  //const hash = bcrypt.hashSync(req.body.password, salt);
   
   const foundUser = db.get('users').find({ email: email });
   const user = foundUser.value();
