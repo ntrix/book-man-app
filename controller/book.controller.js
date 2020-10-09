@@ -7,7 +7,7 @@ const books = Book.find();
 
 module.exports = {
   
-  index: (req, res) => {
+  index: (req, res) => {/*
     const page = +req.query.page;
     const perPage = 10;
     const maxPage = books.length / perPage | 0;
@@ -19,10 +19,10 @@ module.exports = {
       { val: page < maxPage - 1? page + 1: 0},
       { val: page < maxPage - 5? page + 5: page < maxPage - 2? maxPage: 0, label: '»' }
     ];
-    
+    */
     res.render("books/index", {
-      books: Book.drop(start).take(perPage).value(),
-      pages: pageArray
+      books: books,//Book.drop(start).take(perPage).value(),
+      pages: []//pageArray
     });
   },
   

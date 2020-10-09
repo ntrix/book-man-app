@@ -7,7 +7,8 @@ const { User } = require("../shared/db");
 module.exports = {
   
   index: (req, res) => {
-    res.render("users/index", { users: User.find() })
+    let users = User.find();
+    res.render("users/index", { users: users})
   },
   
   update: (req, res) => {
