@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 //const ObjectId = Schema.ObjectId;
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
   //_id: ObjectId,
   username: String,
   email: String,
@@ -19,21 +19,21 @@ const UserSchema = new Schema({
   avatarUrl: String,
 });
 
-const BookSchema = new Schema({
+const bookSchema = new Schema({
   //_id: ObjectId,
   title: String,
   description: String,
   coverUrl: String,
 });
 
-const TranSchema = new Schema({
+const tranSchema = new Schema({
   //_id: ObjectId,
   userId: String,
   bookId: String,
   isComplete: Boolean
 });
 
-const SessionSchema = new Schema({
+const sessionSchema = new Schema({
   cart: [
     {
       bookId: { type: Schema.Types.ObjectId, ref: "Book" },
@@ -42,11 +42,11 @@ const SessionSchema = new Schema({
   ]
 });
 
-const books = mongoose.model("books", BookSchema);
-const users = mongoose.model("users", UserSchema);
-const trans = mongoose.model("trans", TranSchema);
-const sessions = mongoose.model("sessions", SessionSchema);
+const Book = mongoose.model("books", bookSchema);
+const User = mongoose.model("users", userSchema);
+const Tran = mongoose.model("trans", tranSchema);
+const Session = mongoose.model("sessions", sessionSchema);
 
-module.exports = { books, users, trans, sessions }
+module.exports = { Book, User, Tran, Session }
 
 //module.exports = db;
