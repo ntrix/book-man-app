@@ -43,15 +43,17 @@ module.exports = {
   
   update: async (req, res) => {
     const books = await Book.find();
+    const chosenBook = books.find(b => b._id == req.params.id );
+    
     res.render('books/edit', {
       books: books,
-      chosenBook: Book.findById( req.params.id )
+      chosenBook: chosenBook
     });
   },
   
   postUpdate: (req, res) => {
     const {id, title, description} = req.body;
-    Book.findOneAndUpdate({ _id: id }, { title: title, description: description }, { new: true }, function(err, data) {
+    Book.findByIdAndUpdate( id, { title: title, description: description }, { new: true }, function(err, data) {
       if (err) console.log(err);
       else res.redirect(req.baseUrl);
     })
