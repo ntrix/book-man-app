@@ -15,15 +15,15 @@ module.exports.login = (req, res) => {
 module.exports.postLogin = async (req, res, next) => {
   const { errors, email, password } = req.body;
   
-  const foundUser = User.find({ email: email });
-  const user = foundUser.value();
+  const user = await User.find({ email: email });
   
   if (user.wrongLoginCount == 4)
     errors.push("Too many fail attempts! Please try again in 24 hours or reset your password.");
   else if (!user)
     errors.push("User does not exist!")
   else if (password && !bcrypt.compareSync(password, user.password)) {
-    foundUser.set('wrongLoginCount', (user.wrongLoginCount || 0) + 1).write();
+    user.wrongLoginCount = (user.wrongLoginCount || 0) + 1);
+    user.save( err => console.log(err));
     errors.push("Wrong password! " + user.wrongLoginCount + " of 4 attempts.");
     
     if (user.wrongLoginCount >= 3) {
@@ -48,8 +48,9 @@ module.exports.postLogin = async (req, res, next) => {
     res.render("auth/login", { errors: errors, values: req.body });
     return;
   }
-  //user.wrongLoginCount = 0;
-  foundUser.set('wrongLoginCount', 0).write();
+
+  user.wrongLoginCount = 0;
+  user.save( err => console.log(err));
   
   res.cookie('userId', user.id, { signed: true });
   res.cookie('isAdmin', user.isAdmin || 0, { signed: true });
