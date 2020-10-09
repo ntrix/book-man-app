@@ -33,7 +33,7 @@ const TranSchema = new Schema({
   isComplete: Boolean
 });
 
-const sessionSchema = new Schema({
+const SessionSchema = new Schema({
   cart: [
     {
       bookId: { type: Schema.Types.ObjectId, ref: "Book" },
@@ -42,10 +42,11 @@ const sessionSchema = new Schema({
   ]
 });
 
-const Session = mongoose.model("sessions", sessionSchema);
 const books = mongoose.model("books", BookSchema);
 const users = mongoose.model("users", UserSchema);
 const trans = mongoose.model("trans", TranSchema);
-module.exports = (books, users, trans)
+const sessions = mongoose.model("sessions", SessionSchema);
+
+module.exports = { books, users, trans, sessions }
 
 //module.exports = db;

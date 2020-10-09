@@ -1,8 +1,8 @@
 const shortid = require('shortid')
 
-const db = require('../shared/db');
-const users = db.get('users').value();
-
+//const db = require('../shared/db');
+//const users = db.get('users').value();
+const { users } = require("../shared/db");
 
 module.exports = {
   
