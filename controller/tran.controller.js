@@ -3,7 +3,7 @@ const shortid = require('shortid');
 //const db = require('../shared/db');
 //const users = db.get('users').value();
 //const books = db.get('books').value();
-const { User, Book } = require("../shared/db");
+const { User, Book, Tran } = require("../shared/db");
 
 module.exports = {
 

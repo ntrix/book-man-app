@@ -1,7 +1,8 @@
 const shortid = require('shortid')
 
-const db = require('../shared/db');
-const users = db.get('users').value();
+//const db = require('../shared/db');
+//const users = db.get('users').value();
+const { User } = require("../shared/db");
 const cloudinary = require('cloudinary');
 
 module.exports = {
