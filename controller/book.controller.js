@@ -38,8 +38,16 @@ module.exports = {
   postAdd: (req, res) => {
     if (req.body.title.length){
       //req.body.id = 'b' + shortid.generate();
-      Book.insert(req.body);
-      res.redirect('back');
+      //Book.insert(req.body);
+      const book = new Book({
+        title: req.title,
+        description: req.description
+      });
+
+      book.save( function(err, data) {
+        if (err) console.log(err);
+        else res.redirect('back');//done(null, data);
+      })
     }
   },
   
