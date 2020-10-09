@@ -1,7 +1,9 @@
 const shortid = require('shortid');
 
-const db = require('../shared/db');
-const books = db.get('books').value();
+//const db = require('../shared/db');
+//const books = db.get('books').value();
+const { Book } = require("../shared/db");
+const books = Book.find();
 
 module.exports = {
   
@@ -19,7 +21,7 @@ module.exports = {
     ];
     
     res.render("books/index", {
-      books: db.get('books').drop(start).take(perPage).value(),
+      books: Book.drop(start).take(perPage).value(),
       pages: pageArray
     });
   },
@@ -34,20 +36,20 @@ module.exports = {
   postAdd: (req, res) => {
     if (req.body.title.length){
       req.body.id = 'b' + shortid.generate();
-      db.get('books').push(req.body).write();
+      Book.push(req.body).write();
       res.redirect('back');
     }
   },
   
   postUpdate: (req, res) => {
-    db.get('books').find({ id: req.body.id })
+    Book.findById( req.body.id )
       .assign(req.body)
       .write();
     res.redirect(req.baseUrl);
   },
   
   delete: (req, res) => {
-    db.get('books').remove({ id: req.params.id }).write();
+    Book.remove({ id: req.params.id }).write();
     res.redirect(req.baseUrl);
   }
   

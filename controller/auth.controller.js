@@ -4,8 +4,9 @@ const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 const sgMail = require('@sendgrid/mail');
 
-const db = require('../shared/db');
-const users = db.get('users').value();
+//const db = require('../shared/db');
+//const users = db.get('users').value();
+const { User } = require("../shared/db");
 
 module.exports.login = (req, res) => {
   res.render("auth/login");
@@ -16,7 +17,7 @@ module.exports.postLogin = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   
-  const foundUser = db.get('users').find({ email: email });
+  const foundUser = User.find({ email: email });
   const user = foundUser.value();
   
   if (user.wrongLoginCount == 4)
