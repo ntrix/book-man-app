@@ -9,21 +9,21 @@ module.exports = {
   index: async (req, res) => {
     const books = await Book.find();
 
-    const page = +req.query.page;
+    const page = +req.query.page || 1;
     const perPage = 10;
     const maxPage = books.length / perPage | 0;
-    const start = (- 1) * perPage;
+    const start = (page - 1) * perPage;
     const pageArray = [
       { val: page > 5? page - 5: page > 2? 1: 0, label: '«' },
       { val: page > 1? page - 1: 0},
       { val: page, label: '[ ' + page + ' ]' },
-      { val: page < maxPage - 1? page + 1: 0},
+      { val: page < maxPage? page + 1: 0},
       { val: page < maxPage - 5? page + 5: page < maxPage - 2? maxPage: 0, label: '»' }
     ];
     
     console.log(books);
     res.render("books/index", {
-      books: books,//Book.drop(start).take(perPage).value(),
+      books: books.skip(start),//Book.drop(start).take(perPage).value(),
       pages: []//pageArray
     });
   },
