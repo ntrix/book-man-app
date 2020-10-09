@@ -16,23 +16,24 @@ module.exports.postLogin = async (req, res, next) => {
   const { errors, email, password } = req.body;
   
   const user = await User.find({ email: email });
+  let count = user.wrongLoginCount || 0;
   
-  if (user.wrongLoginCount == 4)
+  if (count == 4)
     errors.push("Too many fail attempts! Please try again in 24 hours or reset your password.");
   else if (!user)
     errors.push("User does not exist!")
   else if (password && !bcrypt.compareSync(password, user.password)) {
-    user.wrongLoginCount = (user.wrongLoginCount || 0) + 1);
+    user.wrongLoginCount = ++count;
     user.save( err => console.log(err));
-    errors.push("Wrong password! " + user.wrongLoginCount + " of 4 attempts.");
+    errors.push("Wrong password! " + count + " of 4 attempts.");
     
-    if (user.wrongLoginCount >= 3) {
+    if (count >= 3) {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       const msg = {
         to: email,
         from: 'dev@tienguyen.com',
         subject: 'Warning too many failed attempts by logging in',
-        text: 'You have reached ' + user.wrongLoginCount + ' of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
+        text: 'You have reached ' + count + ' of 4 attempts to login. Please be careful or your account will be locked for 24 hours.',
         html: '<strong>You can also reset your password</strong>',
       };
       try {
@@ -52,7 +53,7 @@ module.exports.postLogin = async (req, res, next) => {
   user.wrongLoginCount = 0;
   user.save( err => console.log(err));
   
-  res.cookie('userId', user.id, { signed: true });
+  res.cookie('userId', user._id, { signed: true });
   res.cookie('isAdmin', user.isAdmin || 0, { signed: true });
   let path = req.signedCookies.path;
   res.redirect(path? path: '/');
