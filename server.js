@@ -1,17 +1,16 @@
 const express = require("express");
 try {
   const mongoose = require("mongoose");
+  mongoose.connect(process.env.MONGO_URL, {
+     useNewUrlParser: true,
+     useUnifiedTopology: true
+  });
 } catch (e) {
   console.log(e);
 }
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const shortid = require('shortid');
-
-mongoose.connect(process.env.MONGO_URL, {
-             useNewUrlParser: true,
-             useUnifiedTopology: true
-          });
 
 const userRoute = require('./routes/user.route');
 const bookRoute = require('./routes/book.route');
