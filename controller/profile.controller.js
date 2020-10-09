@@ -8,7 +8,7 @@ const cloudinary = require('cloudinary');
 module.exports = {
   
   index: (req, res) => {
-    let user = db.get('users').find({ id: req.signedCookies.userId }).value();
+    let user = User.findById( req.signedCookies.userId ).value();
     res.render("profile/index", { user: user })
   },
   
