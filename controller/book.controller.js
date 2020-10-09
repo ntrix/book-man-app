@@ -20,6 +20,8 @@ module.exports = {
       { val: page < maxPage - 5? page + 5: page < maxPage - 2? maxPage: 0, label: '»' }
     ];
     */
+    console.log(books);
+    debugger;
     res.render("books/index", {
       books: books,//Book.drop(start).take(perPage).value(),
       pages: []//pageArray
