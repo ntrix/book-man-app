@@ -11,7 +11,7 @@ module.exports = {
 
     const page = +req.query.page || 1;
     const perPage = 10;
-    const maxPage = books.length / perPage | 0;
+    const maxPage = Math.ceil(books.length / perPage);
     const start = (page - 1) * perPage;
     const pageArray = [
       { val: page > 5? page - 5: page > 2? 1: 0, label: '«' },
@@ -23,8 +23,8 @@ module.exports = {
     
     console.log(books);
     res.render("books/index", {
-      books: books.skip(start),//Book.drop(start).take(perPage).value(),
-      pages: []//pageArray
+      books: books.slice(start, start + perPage),//Book.drop(start).take(perPage).value(),
+      pages: pageArray
     });
   },
   
