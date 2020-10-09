@@ -23,7 +23,7 @@ module.exports = {
     
     console.log(books);
     res.render("books/index", {
-      books: books.,//Book.drop(start).take(perPage).value(),
+      books: books,//Book.drop(start).take(perPage).value(),
       pages: []//pageArray
     });
   },
