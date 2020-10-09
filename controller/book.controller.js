@@ -3,11 +3,11 @@ const shortid = require('shortid');
 //const db = require('../shared/db');
 //const books = db.get('books').value();
 const { Book } = require("../shared/db");
-const books = Book.find();
 
 module.exports = {
   
-  index: (req, res) => {/*
+  index: async (req, res) => {
+    const books = await Book.find( {}, 'title description');/*
     const page = +req.query.page;
     const perPage = 10;
     const maxPage = books.length / perPage | 0;
@@ -21,7 +21,6 @@ module.exports = {
     ];
     */
     console.log(books);
-    debugger;
     res.render("books/index", {
       books: books,//Book.drop(start).take(perPage).value(),
       pages: []//pageArray
@@ -29,6 +28,7 @@ module.exports = {
   },
   
   update: (req, res) => {
+    const books = Book.find();
     res.render('books/edit', {
       books: books,
       chosenBook: books.find(b => b.id === req.params.id)
