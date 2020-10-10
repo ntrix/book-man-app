@@ -10,8 +10,8 @@ module.exports.postLogin = async (req, res, next) => {
   const { email, password } = req.body;
   
   const user = await User.findOne({ email: email });
-  debugger;
-  let count = user.wrongLoginCount || 0;
+  if (!user) return;
+  let count = await user.wrongLoginCount || 0;
   
   if (count == 4)
     errors.push("Too many fail attempts! Please try again in 24 hours or reset your password.");
