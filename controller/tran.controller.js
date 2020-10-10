@@ -10,18 +10,13 @@ module.exports = {
   index: (req, res) => {
     const id = req.signedCookies.userId;
     const isAdmin = +req.signedCookies.isAdmin;
-    console.log(typeof id, typeof isAdmin);
     
-    let trans;
-    if (isAdmin)
-       trans = Tran.find();
-    else
-      trans = Tran.find( id );
+    let trans = isAdmin? Tran.find(): Tran.findById( id );
     
-    let transList = trans.map(t => ({
-      _id: t._id,
-      title: Book.findById( t.bookId ).value().title,
-      username: User.findById( t.userId ).value().username,
+    let transList = trans.map(async t => ({
+      id: t._id,
+      title: await Book.findById( t.bookId ).title,
+      username: await User.findById( t.userId ).username,
       isComplete: t.isComplete
     }) );
     res.render("trans/index", { trans: transList, isAdmin: isAdmin});
