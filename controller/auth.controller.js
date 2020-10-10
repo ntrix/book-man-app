@@ -1,11 +1,8 @@
 require('dotenv').config();
-const shortid = require('shortid')
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 const sgMail = require('@sendgrid/mail');
 
-//const db = require('../shared/db');
-//const users = db.get('users').value();
 const { User } = require("../shared/db");
 
 module.exports.login = (req, res) => {
@@ -25,7 +22,7 @@ module.exports.postLogin = async (req, res, next) => {
     errors.push("User does not exist!")
   else if (password && !bcrypt.compareSync(password, user._doc.password)) {
     user.wrongLoginCount = ++count;
-    user.save( err => console.log(err));
+    user.save( err => err? console.log(err) :0);
     errors.push("Wrong password! " + count + " of 4 attempts.");
     
     if (count >= 3) {
@@ -52,7 +49,7 @@ module.exports.postLogin = async (req, res, next) => {
   }
 
   user.wrongLoginCount = 0;
-  user.save( err => console.log(err));
+  user.save( err => err? console.log(err) :0);
   
   res.cookie('userId', user._id, { signed: true });
   res.cookie('isAdmin', user.isAdmin || 0, { signed: true });
