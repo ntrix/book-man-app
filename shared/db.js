@@ -1,16 +1,7 @@
-/*const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('./shared/db.json');
-const db = low(adapter);
-
-db.defaults({ books: [], users: [], trans: [] }).write();*/
-
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-//const ObjectId = Schema.ObjectId;
 
 const userSchema = new Schema({
-  //_id: ObjectId,
   username: String,
   email: String,
   password: String,
@@ -20,14 +11,12 @@ const userSchema = new Schema({
 });
 
 const bookSchema = new Schema({
-  //_id: ObjectId,
   title: String,
   description: String,
   coverUrl: String,
 });
 
 const tranSchema = new Schema({
-  //_id: ObjectId,
   userId: String,
   bookId: String,
   isComplete: Boolean
@@ -48,5 +37,3 @@ const Tran = mongoose.model("trans", tranSchema);
 const Session = mongoose.model("sessions", sessionSchema);
 
 module.exports = { Book, User, Tran, Session }
-
-//module.exports = db;
