@@ -36,11 +36,11 @@ module.exports = {
   },
   
   complete: async (req, res) => {
-    const matchedTran = await Tran.findById( req.params.id );
-    if (!matchedTran) return res.json({ errors: "Transaction(id) does not exist" });
+    const tran = await Tran.findById( req.params.id );
+    if (!tran) return res.json({ errors: "Transaction(id) does not exist" });
     
-    matchedTran.isComplete = true;
-    matchedTran.save( function(err, data) {
+    tran.isComplete = true;
+    tran.save( function(err, data) {
       if (err) res.json({ errors: err });
       else res.json( tran );
     })
