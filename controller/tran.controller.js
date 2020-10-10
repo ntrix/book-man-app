@@ -6,7 +6,7 @@ module.exports = {
     const id = req.signedCookies.userId;
     const isAdmin = +req.signedCookies.isAdmin;
     
-    let trans = await (isAdmin? Tran.find(): Tran.findById( id ));
+    let trans = await (isAdmin? Tran.find(): Tran.find( {userId: id} )) || [];
     let books = await Book.find();
     let users = await User.find();
     
