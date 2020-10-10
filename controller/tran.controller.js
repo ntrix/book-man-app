@@ -1,8 +1,3 @@
-const shortid = require('shortid');
-
-//const db = require('../shared/db');
-//const users = db.get('users').value();
-//const books = db.get('books').value();
 const { User, Book, Tran } = require("../shared/db");
 
 module.exports = {
@@ -15,15 +10,16 @@ module.exports = {
     let books = await Book.find();
     let users = await User.find();
     
-    books = books.reduce( (acc, b) => Object.assgin(acc, {[b._id]: b.title}), {});
-    console.log(books);
+    books = books.reduce( (acc, b) => Object.assign(acc, {[b._id]: b.title}), {});
+    users = users.reduce( (acc, u) => Object.assign(acc, {[u._id]: u.username}), {});
+    
     trans = trans.map(t => ({
       id: t._id,
-      title: books[t.bookId].title,
-      username: users.find(u => u._id == t.userId ).username,
+      title: books[t.bookId],
+      username: users[t.userId],
       isComplete: t.isComplete
     }) );
-    console.log(trans);
+    
     res.render("trans/index", { trans: trans, isAdmin: isAdmin});
   },
   
@@ -49,7 +45,10 @@ module.exports = {
     const matchedTran = await Tran.findById( req.params.id );
     if (!matchedTran) res.send('Transaction(id) does not exist');
     
-    matchedTran.set('isComplete', true).write();
-    res.redirect('back');
+    matchedTran.isComplete = true;
+    matchedTran.save( function(err, data) {
+      if (err) console.log(err);
+      else res.redirect('back');
+    })
   }
 }

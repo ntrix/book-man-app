@@ -1,7 +1,3 @@
-const shortid = require('shortid')
-
-//const db = require('../shared/db');
-//const users = db.get('users').value();
 const { User } = require("../shared/db");
 
 module.exports = {
@@ -28,7 +24,6 @@ module.exports = {
       });
       return;
     }
-    //req.body.id = 'u' + shortid.generate();
     User.push(req.body).write();
     res.redirect('back');
   },
