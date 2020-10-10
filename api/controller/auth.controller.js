@@ -5,12 +5,8 @@ const sgMail = require('@sendgrid/mail');
 
 const { User } = require("../shared/db");
 
-module.exports.login = (req, res) => {
-  res.render("auth/login");
-}
-
 module.exports.postLogin = async (req, res, next) => {
-  const errors = res.locals.errors;
+  const errors = res.locals.errors || [];
   const { email, password } = req.body;
   
   const user = await User.findOne({ email: email });
@@ -44,7 +40,7 @@ module.exports.postLogin = async (req, res, next) => {
   }
 
   if (errors.length) {
-    res.render("auth/login", { errors: errors, values: req.body });
+    res.json({ errors: errors });
     return;
   }
 

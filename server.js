@@ -18,7 +18,7 @@ const profileRoute = require('./routes/profile.route');
 const tranRoute = require('./routes/tran.route');
 const authRoute = require('./routes/auth.route');
 
-const authRoute = require('./routes/auth.route');
+const APIauthRoute = require('./api/routes/auth.route');
 
 const app = express();
 
@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.use('/api/login',)
+app.use('/api/login', APIauthRoute);
 
 app.use('/books', bookRoute);
 app.use('/users', userRoute);
