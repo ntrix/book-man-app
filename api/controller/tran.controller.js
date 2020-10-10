@@ -4,7 +4,7 @@ module.exports = {
 
   index: async (req, res) => {
     const id = req.body.userId;
-    const isAdmin = +req.body.isAdmin || 0;
+    const { isAdmin = await User.findById( id ).isAdmin || 0;
     
     let trans = await (isAdmin || !id? Tran.find(): Tran.find( {userId: id} )) || [];
     let books = await Book.find();
