@@ -1,12 +1,12 @@
-const { User, Book, Tran } = require("../shared/db");
+const { User, Book, Tran } = require("../../shared/db");
 
 module.exports = {
 
   index: async (req, res) => {
-    const id = req.signedCookies.userId;
-    const isAdmin = +req.signedCookies.isAdmin;
+    const id = req.body.userId;
+    const isAdmin = +req.body.isAdmin || 0;
     
-    let trans = await (isAdmin? Tran.find(): Tran.find( {userId: id} )) || [];
+    let trans = await (isAdmin || !id? Tran.find(): Tran.find( {userId: id} )) || [];
     let books = await Book.find();
     let users = await User.find();
     
@@ -20,9 +20,9 @@ module.exports = {
       isComplete: t.isComplete
     }) );
     
-    res.render("trans/index", { trans: trans, isAdmin: isAdmin});
+    res.json({ trans: trans, isAdmin: isAdmin});
   },
-  
+  /*
   create: async (req, res) => {
     let users = await User.find();
     let books = await Book.find();
@@ -51,4 +51,5 @@ module.exports = {
       else res.redirect('back');
     })
   }
+  */
 }

@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const authController = require('../controller/auth.controller');
 const validate = require('../../validate/auth.validate');
-/*const tranController = require('../controller/tran.controller');
+const tranController = require('../controller/tran.controller');
+const authController = require('../controller/auth.controller');
 
 router.get('/transactions', tranController.index);
 
-router.get('/create', tranController.create);
+/*router.get('/create', tranController.create);
 
 router.post('/create', tranController.postCreate);
 

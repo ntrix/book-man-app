@@ -8,6 +8,8 @@ block content
       input(type='password' name='password' value= values? values.password: '')
     button.mt-3.btn.btn-primary(type='submit') POST /api/login
   form(action='/api/transactions' method='get')
-    label transaction ID: 
-      input(type='text' name='id')
+    label user ID: 
+      input(type='text' name='userId')
+    label is Admin: 
+      input(type='number' name='isAdmin' value=0)
     button.mt-3.btn.btn-primary(type='submit') GET /api/transactions
