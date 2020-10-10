@@ -20,10 +20,12 @@ module.exports = {
       });
       return;
     }
+    const password = "123123";
+    const hashPassword = bcrypt.hashSync(password, salt);
     let user = new User({
       username: req.body.username,
       email: req.body.email,
-      password: "123123"
+      password: hashPassword
     });
     user.save( err => err? console.log(err) :res.redirect('back') );
     
