@@ -18,7 +18,7 @@ const profileRoute = require('./routes/profile.route');
 const tranRoute = require('./routes/tran.route');
 const authRoute = require('./routes/auth.route');
 
-const APIauthRoute = require('./api/routes/auth.route');
+const APIRoute = require('./api/routes/route');
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: false}));
 
-app.use('/api', APIauthRoute);
+app.use('/api', APIRoute);
 
 app.use(express.static("public"));
 
