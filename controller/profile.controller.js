@@ -24,13 +24,15 @@ module.exports = {
   },
   
   postAvatar: async (req, res) => {
-    let id = req.signedCookies.userId;
+    const users = await User.find();
     const errors = res.locals.errors;
+    let id = req.signedCookies.userId;
+    
     if (errors) {
       res.render("profile/avatar", {
         errors: errors,
         values: req.body,
-        users: User.find()
+        users: users
       });
       return;
     }
@@ -44,11 +46,14 @@ module.exports = {
       api_secret: process.env.CD_API_SECRET
     });
     
-    cloudinary.uploader.upload(path, function(result, error) {
+    cloudinary.uploader.upload(path, async (result, error) => {
       if (result) {
-        User.find( id ).set('avatarUrl', result.url).write();
+        let user = await User.findById(id);
+        user.avatarUrl = result.url;
+        user.save( err => err? console.log(err) :0 );
         console.log(result.url);
-      }
+      } else
+        console.log(error);
       res.redirect('back');
     });
   },
