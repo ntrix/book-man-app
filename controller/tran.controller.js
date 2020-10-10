@@ -7,18 +7,19 @@ const { User, Book, Tran } = require("../shared/db");
 
 module.exports = {
 
-  index: (req, res) => {
+  index: async (req, res) => {
     const id = req.signedCookies.userId;
     const isAdmin = +req.signedCookies.isAdmin;
     
-    let trans = isAdmin? Tran.find(): Tran.findById( id );
+    let trans = await (isAdmin? Tran.find(): Tran.findById( id ));
     
     let transList = trans.map(async t => ({
-      id: t._id,
+      _id: t._id,
       title: await Book.findById( t.bookId ).title,
       username: await User.findById( t.userId ).username,
       isComplete: t.isComplete
     }) );
+    console.log(transList);
     res.render("trans/index", { trans: transList, isAdmin: isAdmin});
   },
   

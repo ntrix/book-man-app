@@ -20,13 +20,13 @@ block content
       
     each tran in trans
       tr
-        td= tran.id
+        td= tran._id
         td(colspan='4')= tran.title
         td= tran.username
         td= tran.isComplete?'completed':'[ open ]'
         td
           if isAdmin
             if !tran.isComplete
-              a.btn.btn-sm.btn-warning(href='/trans/'+tran.id+'/complete') Close
+              a.btn.btn-sm.btn-warning(href='/trans/'+tran._id+'/complete') Close
             else
               button.btn.btn-sm.btn-light(disabled) closed
