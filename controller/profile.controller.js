@@ -9,15 +9,15 @@ module.exports = {
   },
   
   postUpdate: async (req, res) => {
-    User.findById( req.body.id )
-      .assign(req.body)
-      .write();
-    res.redirect(req.baseUrl);
+    let user = await User.findById( req.body.id );
+    user.username = req.body.username;
+    user.email = req.body.email;
+    user.save( err => err? console.log(err) :res.redirect(req.baseUrl));
   },
   
   
   avatar: async (req, res) => {
-    let user = { id: req.signedCookies.userId };
+    let user = await User.findById( req.signedCookies.userId );
     res.render('profile/avatar', {
       user: user
     });
