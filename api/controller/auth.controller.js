@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 const sgMail = require('@sendgrid/mail');
 
-const { User } = require("../shared/db");
+const { User } = require("../../shared/db");
 
 module.exports.postLogin = async (req, res, next) => {
   const errors = res.locals.errors || [];
@@ -49,6 +49,5 @@ module.exports.postLogin = async (req, res, next) => {
   
   res.cookie('userId', user._id, { signed: true });
   res.cookie('isAdmin', user.isAdmin || 0, { signed: true });
-  let path = req.signedCookies.path;
-  res.redirect(path? path: '/');
+  res.json({ token: res.cookie });
 }
