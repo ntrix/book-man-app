@@ -13,7 +13,8 @@ module.exports.login = (req, res) => {
 }
 
 module.exports.postLogin = async (req, res, next) => {
-  const { errors, email, password } = req.body;
+  const errors = res.locals.errors;
+  const { email, password } = req.body;
   
   const user = await User.find({ email: email });
   let count = user.wrongLoginCount || 0;
