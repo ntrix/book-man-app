@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.use('/api/login', APIauthRoute);
+app.use('/api', APIauthRoute);
 
 app.use('/books', bookRoute);
 app.use('/users', userRoute);
