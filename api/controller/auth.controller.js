@@ -48,9 +48,7 @@ module.exports.postLogin = async (req, res, next) => {
     user.wrongLoginCount = 0;
     user.save( err => err? console.log(err) :0);
 
-    res.cookie('userId', user._id, { signed: true });
-    res.cookie('isAdmin', user.isAdmin || 0, { signed: true });
-    res.json({ token: res.cookie });
+    res.json({ token: { userId: user._id, isAdmin: user.isAdmin || 0} });
   } catch(e) {
     console.log('user not found: ', e);
     next();
