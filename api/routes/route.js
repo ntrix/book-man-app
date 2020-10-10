@@ -7,11 +7,9 @@ const authController = require('../controller/auth.controller');
 
 router.get('/transactions', tranController.index);
 
-/*router.get('/create', tranController.create);
+router.post('/transactions/create', tranController.postCreate);
 
-router.post('/create', tranController.postCreate);
-
-router.get('/:id/complete', tranController.complete);*/
+router.get('/transactions/:id/complete', tranController.complete);
 
 router.post('/login', /*validate.postLogin,*/ authController.postLogin);
 

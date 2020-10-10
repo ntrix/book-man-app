@@ -4,8 +4,8 @@ module.exports = {
 
   index: async (req, res) => {
     const id = req.body.userId;
-    const { isAdmin = await User.findById( id ).isAdmin || 0;
-    
+    const isAdmin = await (User.findById( id ).isAdmin || 0);
+    console.log(req.body, isAdmin, id)
     let trans = await (isAdmin || !id? Tran.find(): Tran.find( {userId: id} )) || [];
     let books = await Book.find();
     let users = await User.find();
@@ -22,12 +22,6 @@ module.exports = {
     
     res.json({ trans: trans, isAdmin: isAdmin});
   },
-  /*
-  create: async (req, res) => {
-    let users = await User.find();
-    let books = await Book.find();
-    res.render("trans/create", { users: users, books: books });
-  },
   
   postCreate: async (req, res) => {
     const tran = new Tran({
@@ -36,20 +30,20 @@ module.exports = {
     });
     
     tran.save( function(err, data) {
-      if (err) console.log(err);
-      else res.redirect(req.baseUrl);
+      if (err) res.json({ errors: err });
+      else res.json( tran );
     })
   },
   
   complete: async (req, res) => {
     const matchedTran = await Tran.findById( req.params.id );
-    if (!matchedTran) res.send('Transaction(id) does not exist');
+    if (!matchedTran) return res.json({ errors: "Transaction(id) does not exist" });
     
     matchedTran.isComplete = true;
     matchedTran.save( function(err, data) {
-      if (err) console.log(err);
-      else res.redirect('back');
+      if (err) res.json({ errors: err });
+      else res.json( tran );
     })
   }
-  */
+  
 }
