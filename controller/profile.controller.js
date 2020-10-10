@@ -3,12 +3,12 @@ const cloudinary = require('cloudinary');
 
 module.exports = {
   
-  index: (req, res) => {
+  index: async (req, res) => {
     let user = User.findById( req.signedCookies.userId ).value();
     res.render("profile/index", { user: user })
   },
   
-  postUpdate: (req, res) => {
+  postUpdate: async (req, res) => {
     User.findById( req.body.id )
       .assign(req.body)
       .write();
@@ -16,14 +16,14 @@ module.exports = {
   },
   
   
-  avatar: (req, res) => {
+  avatar: async (req, res) => {
     let user = { id: req.signedCookies.userId };
     res.render('profile/avatar', {
       user: user
     });
   },
   
-  postAvatar: (req, res) => {
+  postAvatar: async (req, res) => {
     let id = req.signedCookies.userId;
     const errors = res.locals.errors;
     if (errors) {
