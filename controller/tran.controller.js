@@ -13,7 +13,7 @@ module.exports = {
     
     let trans = await (isAdmin? Tran.find(): Tran.findById( id ));
     
-    let transList = trans.map(async t => ({
+    let transList = await trans.map(async t => ({
       id: t._id,
       title: await Book.findById( t.bookId ).title,
       username: await User.findById( t.userId ).username,
@@ -30,7 +30,7 @@ module.exports = {
   },
   
   postCreate: async (req, res) => {
-    const tran = new Book({
+    const tran = new Tran({
       userId: req.body.userId,
       bookId: req.body.bookId
     });
