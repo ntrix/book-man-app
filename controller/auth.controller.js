@@ -16,14 +16,14 @@ module.exports.postLogin = async (req, res, next) => {
   const errors = res.locals.errors;
   const { email, password } = req.body;
   
-  const user = await User.find({ email: email });
+  const user = await User.findOne({ email: email });
   let count = user.wrongLoginCount || 0;
   
   if (count == 4)
     errors.push("Too many fail attempts! Please try again in 24 hours or reset your password.");
   else if (!user)
     errors.push("User does not exist!")
-  else if (password && !bcrypt.compareSync(password, user.password)) {
+  else if (password && !bcrypt.compareSync(password, user._doc.password)) {
     user.wrongLoginCount = ++count;
     user.save( err => console.log(err));
     errors.push("Wrong password! " + count + " of 4 attempts.");
