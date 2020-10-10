@@ -2,7 +2,7 @@ module.exports = {
   
   postLogin: (req, res, next) => {
     res.locals = { errors: [] };
-    
+    console.log(req.body);
     if (!req.body.email.length) 
       res.locals.errors.push('Email is required');
     
