@@ -12,15 +12,19 @@ module.exports = {
     const isAdmin = +req.signedCookies.isAdmin;
     
     let trans = await (isAdmin? Tran.find(): Tran.findById( id ));
+    let books = await Book.find();
+    let users = await User.find();
     
-    let transList = await trans.map(async t => ({
+    books = books.reduce( (acc, b) => Object.assgin(acc, {[b._id]: b.title}), {});
+    console.log(books);
+    trans = trans.map(t => ({
       id: t._id,
-      title: await Book.findById( t.bookId ).title,
-      username: await User.findById( t.userId ).username,
+      title: books[t.bookId].title,
+      username: users.find(u => u._id == t.userId ).username,
       isComplete: t.isComplete
     }) );
-    console.log(transList);
-    res.render("trans/index", { trans: transList, isAdmin: isAdmin});
+    console.log(trans);
+    res.render("trans/index", { trans: trans, isAdmin: isAdmin});
   },
   
   create: async (req, res) => {
