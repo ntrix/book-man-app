@@ -27,6 +27,8 @@ app.set('views', './views');
 
 app.use(bodyParser.urlencoded({ extended: false}));
 
+app.use('/api', APIauthRoute);
+
 app.use(express.static("public"));
 
 app.use(cookieParser( [ shortid.generate(), shortid.generate() ] ));
@@ -35,7 +37,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.use('/api', APIauthRoute);
 
 app.use('/books', bookRoute);
 app.use('/users', userRoute);
