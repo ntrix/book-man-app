@@ -1,5 +1,3 @@
-//const db = require('../shared/db');
-
 module.exports = {
   requireAuth: (req, res, next) => {
     if (!req.signedCookies.userId) {
@@ -13,7 +11,6 @@ module.exports = {
   isAdmin: (req, res, next) => {
     if (req.signedCookies.isAdmin)
       next();
-    //else res.redirect('back');
   }
   
 }

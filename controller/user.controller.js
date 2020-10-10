@@ -21,10 +21,7 @@ module.exports = {
     let user = new User({
       username: req.body.username,
       email: req.body.email,
-      password: "123123",
-      isAdmin: 0,
-      wrongLoginCount: 0,
-      avatarUrl: "",
+      password: "123123"
     });
     user.save( err => err? console.log(err) :0);
     res.redirect('back');
@@ -39,7 +36,8 @@ module.exports = {
   },
   
   postUpdate: async (req, res) => {
-    User.findById( req.body.id )
+    let user = User.findById( req.body.id );
+    user = req.body;
       .assign(req.body)
       .write();
     res.redirect(req.baseUrl);
