@@ -4,7 +4,7 @@ const cloudinary = require('cloudinary');
 module.exports = {
   
   index: async (req, res) => {
-    let user = User.findById( req.signedCookies.userId );
+    let user = await User.findById( req.signedCookies.userId );
     res.render("profile/index", { user: user })
   },
   
