@@ -6,7 +6,8 @@ block content
       input(type='email' name='email' value= values? values.email: '')
     label Password: 
       input(type='password' name='password' value= values? values.password: '')
-    button.mt-3.btn.btn-primary(type='submit') Post Submit
-  label Password: 
-    input(type='password' name='password' value= values? values.password: '')
-  button.mt-3.btn.btn-primary(type='submit') Post Submit
+    button.mt-3.btn.btn-primary(type='submit') POST /api/login
+  form(action='/api/transactions' method='get')
+    label transaction ID: 
+      input(type='text' name='id')
+    button.mt-3.btn.btn-primary(type='submit') GET /api/transactions
