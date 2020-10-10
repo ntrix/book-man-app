@@ -1,0 +1,12 @@
+extends common
+  
+block content
+  form(action='/api/login' method='post')
+    label Email:
+      input(type='email' name='email' value= values? values.email: '')
+    label Password: 
+      input(type='password' name='password' value= values? values.password: '')
+    button.mt-3.btn.btn-primary(type='submit') Post Submit
+  label Password: 
+    input(type='password' name='password' value= values? values.password: '')
+  button.mt-3.btn.btn-primary(type='submit') Post Submit

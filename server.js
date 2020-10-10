@@ -36,7 +36,9 @@ app.use(cookieParser( [ shortid.generate(), shortid.generate() ] ));
 app.get("/", (req, res) => {
   res.render("index");
 });
-
+app.get("/testapi", (req, res) => {
+  res.render("testapi");
+});
 
 app.use('/books', bookRoute);
 app.use('/users', userRoute);
