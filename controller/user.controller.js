@@ -26,7 +26,7 @@ module.exports = {
       wrongLoginCount: 0,
       avatarUrl: "",
     });
-    User.push(req.body).write();
+    user.save( err => err? console.log(err) :0);
     res.redirect('back');
   },
   
