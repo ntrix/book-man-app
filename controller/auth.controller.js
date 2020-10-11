@@ -9,8 +9,8 @@ module.exports.login = (req, res, next) => {
   try {
     var a; a.b();
   } catch(e) {
-    res.status(500).type('text').render("errors/error500", { e });
-    next();
+    res.status(500).render("errors/error500", { e });
+    return next();
   }
   
   res.render("auth/login");
