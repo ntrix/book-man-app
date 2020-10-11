@@ -5,10 +5,13 @@ const sgMail = require('@sendgrid/mail');
 
 const { User } = require("../shared/db");
 
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
   try {
     var a; a.b();
-  )
+  } catch(e) {
+    res.status(500).type('text').render("errors/error500", { e });
+    next();
+  }
   
   res.render("auth/login");
 }
