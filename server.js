@@ -46,6 +46,10 @@ app.use('/profile', profileRoute);
 app.use('/trans', tranRoute);
 app.use('/auth', authRoute);
 
+app.use((req, res, next) => {
+  res.status(500).type('text').send('Prettier error 500 Page');
+});
+
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });

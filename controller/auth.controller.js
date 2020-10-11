@@ -6,6 +6,10 @@ const sgMail = require('@sendgrid/mail');
 const { User } = require("../shared/db");
 
 module.exports.login = (req, res) => {
+  try {
+    var a; a.b();
+  )
+  
   res.render("auth/login");
 }
 
