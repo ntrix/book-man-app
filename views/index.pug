@@ -2,15 +2,15 @@ extends common
 
 block header
   h1.col My library app
-  h2.col Welcome
+  div.col
+    h3 Welcome
   
 block content
-  div.col-sm-8.col-md-6.col-lg-4
-    div.mb-3
-      a.col.btn.btn-lg.btn-success(href="/books") Book management
-    div.mb-3
-      a.col.btn.btn-lg.btn-success(href="/users") User management
-    div.mb-3
-      a.col.btn.btn-lg.btn-success(href="/profile") User profile
-    div.mb-3
-      a.col.btn.btn-lg.btn-primary(href="/trans") All transactions
+  div.mb-3
+    a.col.btn.btn-lg.btn-success(href="/books") Book management
+  div.mb-3
+    a.col.btn.btn-lg.btn-success(href="/users") User management
+  div.mb-3
+    a.col.btn.btn-lg.btn-success(href="/profile") User profile setting
+  div.mb-3
+    a.col.btn.btn-lg.btn-primary(href="/trans") All transactions

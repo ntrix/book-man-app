@@ -4,18 +4,19 @@ html
     title Book management
     link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
     link(rel="stylesheet" href="/style.css")
-    
-  body.container
-    div.d-flex
-      a(href='/')
-        img.mr-3(src='https://cdn.glitch.com/7cdf3068-56d2-4682-b13f-5608dbf6420e%2Fbtc.png?v=1600874818880' width=64 height=64)
-      div.d-block
-        block header
-    hr
-    
-    block content
-    hr
-    
-    block foot
-      #footer
-        p Copyright &copy; 2020
+  body.container.d-flex.justify-content-center
+    div.text-center
+      div.d-flex.container-md
+        a(href='/')
+          img.mr-3(src='https://cdn.glitch.com/7cdf3068-56d2-4682-b13f-5608dbf6420e%2Fbtc.png?v=1600874818880' width=64 height=64)
+        div.d-block
+          block header
+      hr
+      div.d-flex.justify-content-center
+        div
+          block content
+      hr
+
+      block foot
+        #footer
+          p Copyright &copy; 2020
