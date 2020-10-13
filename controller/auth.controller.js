@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 const sgMail = require("@sendgrid/mail");
 
-const { User } = require("../shared/db");
+const { User } = require("../models/db");
 
 module.exports.login = (req, res, next) => {
 	/*try {
