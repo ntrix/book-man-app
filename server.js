@@ -6,8 +6,9 @@ try {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	});
-} catch (e) {
-	console.log(e);
+} catch (err) {
+	console.error(err.stack);
+	res.status(500).render("errors/error500", { err: err });
 }
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
