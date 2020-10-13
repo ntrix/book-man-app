@@ -1,5 +1,11 @@
-extends ../common
+extends ../layout
+
 block header
-  h1  Prettier error 500 Page :)
-  hr
-  div= err
+  h1  Errors Page :)
+  div.col
+    h3 Error 500
+    a.ml-auto.btn.btn-secondary(href='/') Back to Homepage
+
+block content
+  div.col
+    p= err

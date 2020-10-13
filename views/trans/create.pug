@@ -1,11 +1,12 @@
-extends ../common
+extends ../layout
+
 block header
   h1.col Transactions
   div.col
     h3 Add new transactions
     a.btn.btn-secondary(href='/trans') Back to transaction list
-    
-block content
+
+block control
   form(action='' method='post')
     label Select an user
       select.form-control(name='userId')

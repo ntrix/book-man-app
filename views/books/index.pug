@@ -1,17 +1,21 @@
-extends ../common
+extends ../layout
+
 block header
   h1.col Library
   div.col
     h3 Book management
     a.ml-auto.btn.btn-secondary(href='/') Back to Homepage
-block content
+
+block control
   form(action='/books/add' method='post')
-    label Title: 
+    label Title:
       input(type='text' name='title' required)
     label Description:
       input(type='text' name='description')
     button.mt-3.btn.btn-primary(type='submit') Add to library
   hr
+
+block content
   nav.d-flex.justify-content-center(aria-label='Page navigation')
     ul.pagination
       each page in pages

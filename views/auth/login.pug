@@ -1,17 +1,21 @@
-extends ../common
+extends ../layout
+
 block header
   h1.col My account
   div.col
     h3.text-danger User login
     a.btn.btn-secondary(href='/') Back to Homepage
-    
-block content
+
+block control
   form(method='post')
-    label Email: 
+    label Email:
       input(type='email' name='email' value= values? values.email: '')
     label Password:
       input(type='password' name='password')
     button.mt-3.btn.btn-primary(type='submit') Login
   hr
+
+block content
   each error in errors || []
     p.alert.alert-danger= error
+  p Please enter your email and password to login, or use test account info below. Feel free to contact me for an admin role test account or just guess, it is very easy!

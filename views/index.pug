@@ -1,16 +1,17 @@
-extends common
+extends layout
 
 block header
-  h1.col My library app
+  h1.col Book Man app
   div.col
     h3 Welcome
-  
-block content
-  div.mb-3
-    a.col.btn.btn-lg.btn-success(href="/books") Book management
-  div.mb-3
-    a.col.btn.btn-lg.btn-success(href="/users") User management
-  div.mb-3
-    a.col.btn.btn-lg.btn-success(href="/profile") User profile setting
-  div.mb-3
-    a.col.btn.btn-lg.btn-primary(href="/trans") All transactions
+
+block control
+  div.container-sm
+    div.mb-3
+      a.col.btn.btn-lg.btn-success(href="/books") Book management
+    div.mb-3
+      a.col.btn.btn-lg.btn-success(href="/users") User management
+    div.mb-3
+      a.col.btn.btn-lg.btn-success(href="/profile") User profile setting
+    div.mb-3
+      a.col.btn.btn-lg.btn-primary(href="/trans") All transactions

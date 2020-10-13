@@ -1,17 +1,18 @@
-extends ../common
+extends ../layout
+
 block header
   h1.col User profile
   div.col
     h3 Profile update
     a.btn.btn-secondary(href='/') Back to Homepage
-    
-block content
+
+block control
   div.d-flex.justify-content-between
     img.mb-3(src=user.avatarUrl || 'https://cdn.glitch.com/7cdf3068-56d2-4682-b13f-5608dbf6420e%2Fbtc.png?v=1600874818880' width=48 height=48)
-    a.mb-3.btn.btn-success(href='/profile/avatar') Update your avatar
+    a.mb-3.btn.btn-success(href='/profile/avatar') Upload avatar
   form(action='' method='post')
     input(type='text' name='id' value=user.id hidden)
-    label Username: 
+    label Username:
       input(type='text' name='username' value=user.username required)
     label Email:
       input(type='email' name='email' value=user.email)

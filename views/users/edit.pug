@@ -1,22 +1,24 @@
-extends ../common
+extends ../layout
+
 block header
   h1.col User management
   div.col
     h3 Edit user's information
     a.btn.btn-secondary(href='/users') Back to user management
-    
-block content
+
+block control
   form(action='/users/upd' method='post')
     input(type='text' name='id' value=chosenUser.id hidden)
-    label Username: 
+    label Username:
       input(type='text' name='username' value=chosenUser.username required)
     label Email:
       input(type='email' name='email' value=chosenUser.email)
     button.mt-3.btn.btn-primary(type='submit') Update this user
   hr
+block content
   table.table.table-lg.col
     legend User list
     each user in users
       tr
         td= user.username
-        td= user.email  
+        td= user.email

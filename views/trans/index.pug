@@ -1,23 +1,25 @@
-extends ../common
+extends ../layout
+
 block header
   h1.col Transactions
   div.col
     h3 Transactions list
     a.btn.btn-secondary(href='/') Back to Homepage
-    
-block content
+
+block control
   if isAdmin
-    a.col-4.mb-3.btn.btn-primary(href='/trans/create') Create a transaction
+    a.mb-3.btn.btn-primary(href='/trans/create') Create a transaction
   else
-    button.col-4.mb-3.btn.btn-light(disabled) Create a transaction
-  
+    button.mb-3.btn.btn-light(disabled) Create a transaction
+
+block content
   table.table.table-lg.col
     tr
       th ID
       th(colspan='4') Book title
       th User
       th Status
-      
+
     each tran in trans
       tr
         td= tran.id

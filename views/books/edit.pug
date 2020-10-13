@@ -1,10 +1,12 @@
-extends ../common
+extends ../layout
+
 block header
   h1.col Library
   div.col
     h3 Edit book's information
     a.btn.btn-secondary(href='/books') Back to book management
-block content
+
+block control
   form(action='/books/upd' method='post')
     input(type='text' name='id' value=chosenBook.id hidden)
     label Title:
@@ -13,6 +15,8 @@ block content
       input(type='text' name='description' value=chosenBook.description)
     button.mt-3.btn.btn-primary(type='submit') Update this book
   hr
+
+block content
   table.table.table-lg.col
     legend Book list
     tr

@@ -1,11 +1,12 @@
-extends ../common
+extends ../layout
+
 block header
   h1.col User profile
   div.col
     h3 Avatar
     a.btn.btn-secondary(href='/profile') Back to profile update
-    
-block content
+
+block control
   div.d-flex.justify-content-between
     img.mb-3(src=user.avatarUrl || 'https://cdn.glitch.com/7cdf3068-56d2-4682-b13f-5608dbf6420e%2Fbtc.png?v=1600874818880' width=48 height=48)
   form(action='' method='post' enctype='multipart/form-data')

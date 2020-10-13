@@ -1,18 +1,19 @@
-extends ../common
+extends ../layout
 block header
   h1.col Users management
   div.col
     h3 Add user
     a.btn.btn-secondary(href='/') Back to Homepage
-    
-block content
+
+block control
   form(action='/users/add' method='post')
-    label Username: 
+    label Username:
       input(type='text' name='username' value= values? values.username: '')
     label Email:
       input(type='email' name='email' value= values? values.email: '')
     button.mt-3.btn.btn-primary(type='submit') Add to user list
   hr
+block content
   each error in errors || []
     p.alert.alert-danger= error
   table.table.table-lg.col
@@ -20,7 +21,7 @@ block content
     each user in users
       tr
         td= user.username
-        td= user.email        
+        td= user.email
         td
           a.ml-3.btn.btn-sm.btn-warning(href='/users/upd/' + user.id) Edit
         td

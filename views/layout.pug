@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title Book Management App
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/style.css")
+
+  body
+    div.container
+      div.col
+        div.d-flex.justify-content-center
+          div.d-flex
+            a(href='/')
+              img.mr-3(src='https://cdn.glitch.com/7cdf3068-56d2-4682-b13f-5608dbf6420e%2Fbtc.png?v=1600874818880' width=64 height=64)
+            div
+              block header
+        hr
+
+      div.col
+        div.d-flex.justify-content-center
+          div
+            block control
+
+        div.d-flex.justify-content-center
+          div
+            block content
+        hr
+
+      div.col
+        div.d-flex.justify-content-center.text-center
+          block foot
+            #footer
+              div.d-sm-flex
+                p login account for testing purpose: &nbsp;
+                p email: tester@test.dev &nbsp;
+                p password: 123123 &nbsp;
+              p please contact me for an admin role test account or try to guess :)
+              p Copyright &copy; 2020
