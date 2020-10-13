@@ -12,3 +12,6 @@ email: tester@test.dev
 password: 123123
 
 please contact fi you need an admin role test account
+
+## keywords
+node, nodejs, express, mongo, mongoDB, mongoose, lowdb, heroku, cloudinary, webmail, sendgrid, swagger
