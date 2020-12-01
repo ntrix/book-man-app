@@ -11,7 +11,12 @@ login account for testing purpose:
 email: tester@test.dev
 password: 123123
 
-please contact fi you need an admin role test account
+please contact if you need an admin role test account
 
 ## keywords
+
 node, nodejs, express, mongo, mongoDB, mongoose, lowdb, heroku, cloudinary, webmail, sendgrid, swagger
+
+## deploy and test
+
+https://book-lib-management.herokuapp.com/
