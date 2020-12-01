@@ -8,6 +8,8 @@ const bookController = require('../controller/book.controller');
 
 router.get('/books', bookController.getAll);
 
+router.get('/:quantity/books', bookController.getQuantity);
+
 router.post('/login', /*validate.postLogin,*/ authController.postLogin);
 
 router.get('/transactions', tranController.index);
