@@ -1,4 +1,4 @@
-const { Book } = require("../../shared/db");
+const { Book } = require("../../models/db");
 
 module.exports = {
 
