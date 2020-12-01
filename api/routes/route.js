@@ -4,6 +4,9 @@ const router = express.Router();
 const validate = require('../../validate/auth.validate');
 const authController = require('../controller/auth.controller');
 const tranController = require('../controller/tran.controller');
+const bookController = require('../controller/book.controller');
+
+router.get('/books', bookController.getAll);
 
 router.post('/login', /*validate.postLogin,*/ authController.postLogin);
 
