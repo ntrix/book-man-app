@@ -12,7 +12,7 @@ block control
     label Email:
       input(type='email' name='email' value= values? values.email: '')
     button.mt-3.btn.btn-primary(type='submit') Add to user list
-  hr
+  .divider
 block content
   each error in errors || []
     p.alert.alert-danger= error
