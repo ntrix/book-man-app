@@ -9,6 +9,13 @@
     #9884ff 56%,
     #4834d4 85%
   );
+  --secondary-color: linear-gradient(
+    180deg,
+    #6c757d,
+    #f3f3f3 28%,
+    #9ca5ad 56%,
+    #6c757d 85%
+  );
   --success-color: linear-gradient(
     180deg,
     #6ab04c,
@@ -93,9 +100,23 @@ input {
   border-radius: 0.25rem;
 }
 
+.btn.btn-success {
+  background: var(--success-color);
+}
+.btn.btn-primary {
+  background: var(--primary-color);
+}
+.btn.btn-secondary {
+  background: var(--secondary-color);
+}
+.btn.btn-light {
+  background: var(--light-background);
+}
+.btn.btn-danger {
+  background: var(--danger-color);
+}
 .btn {
   outline: var(--border);
-  background: var(--success-color);
   box-shadow: var(--shadow-bg);
   border: none;
 }
@@ -109,4 +130,21 @@ input {
 #footer {
   font-size: 0.9rem;
   line-height: 0;
+}
+
+.divider {
+  height: 60px;
+  background: linear-gradient(180deg, #0008, #0004 1px, #0001 8px, transparent);
+  margin-top: 1rem;
+  margin-bottom: -2rem;
+}
+
+.divider::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 60px;
+  background-color: transparent;
+  background: linear-gradient(90deg, #fff, #fff0, #fff);
+  z-index: 1;
 }
