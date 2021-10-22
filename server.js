@@ -12,6 +12,7 @@ try {
 }
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cors = require('cors');
 
 const userRoute = require("./routes/user.route");
 const bookRoute = require("./routes/book.route");
@@ -26,6 +27,7 @@ const app = express();
 app.set("view engine", "pug");
 app.set("views", "./views");
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api", APIRoute);
