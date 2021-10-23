@@ -16,7 +16,7 @@ block control
 block content
   each error in errors || []
     p.alert.alert-danger= error
-  table.table.table-lg.col
+  table.table.table-lg.col.table-striped
     legend User list
     each user in users
       tr

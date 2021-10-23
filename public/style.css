@@ -109,24 +109,40 @@ input {
 .btn.btn-secondary {
   background: var(--secondary-color);
 }
+.btn.btn-warning {
+  background: var(--warning-color);
+}
 .btn.btn-light {
   background: var(--light-background);
 }
 .btn.btn-danger {
   background: var(--danger-color);
 }
+.btn::after,
+.btn::before,
 .btn {
-  outline: var(--border);
-  box-shadow: var(--shadow-bg);
-  border: none;
+  outline: none;
 }
-.btn:not([disabled]):hover {
-  border: none;
-  background: var(--warning-color);
+.btn {
+  position: relative;
+  border: thin solid transparent;
+  box-shadow: var(--shadow-bg);
+}
+.btn:not(:disabled):not(.disabled):hover {
+  color: var(--light-color);
+  background: var(--light-second-background);
+  border: var(--border);
   transform: translate3d(0, -2px, 0);
   transition: all 0.3s ease;
 }
-
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.btn:not(:disabled):not(.disabled):hover::after {
+  bottom: -4px;
+}
 #footer {
   font-size: 0.9rem;
   line-height: 0;

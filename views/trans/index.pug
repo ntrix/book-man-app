@@ -13,17 +13,17 @@ block control
     button.mb-3.btn.btn-light(disabled) Create a transaction
 
 block content
-  table.table.table-lg.col
+  table.table.table-lg.col.table-striped
     tr
       th ID
-      th(colspan='4') Book title
+      th Book title
       th User
       th Status
 
     each tran in trans
       tr
         td= tran.id
-        td(colspan='4')= tran.title
+        td= tran.title
         td= tran.username
         td= tran.isComplete?'completed':'[ open ]'
         td

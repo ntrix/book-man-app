@@ -28,11 +28,11 @@ block content
                 span= page.val
           else
             button.page-link.text-muted.bg-light(disabled)= page.label || '-'
-  table.table.table-lg.col
+  table.table.table-lg.table-striped.col
     caption Book list
     tr
       th Book title
-      th(colspan='4') Description
+      th Description
       th
       th
     each book in books
