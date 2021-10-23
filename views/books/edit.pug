@@ -17,11 +17,11 @@ block control
   .divider
 
 block content
-  table.table.table-lg.col
+  table.table.table-lg.col.table-striped
     legend Book list
     tr
       th Book title
-      th(colspan='4') Description
+      th Description
     each book in books
       tr
         td= book.title
